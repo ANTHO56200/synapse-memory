@@ -61,6 +61,7 @@ All agents share **the same brain** — knowledge learned in Claude is available
 | `/learn <insight>` | Promote reusable knowledge to the global brain |
 | `/forget <topic>` | Clean removal — soft by default, restorable from the attic |
 | `/memory-map` | Visual HTML dashboard of everything your agent knows |
+| `/memory-budget` | Choose how much memory auto-loads per session (lean/pro/max) — storage itself is unlimited |
 | `/consolidate` | Run the sleep cycle right now |
 | `/memory-doctor` | Memory health score /100 + auto-fixes |
 
@@ -87,7 +88,7 @@ Plus the automatic part: memory auto-loads at every session start, a pre-compact
 └── scratch/                         ephemeral (pre-compaction dumps)
 ```
 
-Memory lives on a **compression gradient**, like human memory: L0 full detail → L1 one-page summary → L2 one index line. Only L2 loads by default (≈1–2k tokens per session); depth is one file-read away. Hard limits (index ≤60 lines, primer ≤150) force compression so the hot context never bloats.
+Memory lives on a **compression gradient**, like human memory: L0 full detail → L1 one-page summary → L2 one index line. Only L2 loads by default — ≈1–2k tokens per session on the default budget, resizable up to ~10k with `/memory-budget` if you juggle dozens of projects; depth is one file-read away. Hard limits at your chosen budget force compression so the hot context never bloats, while **storage on disk stays unlimited**. When the index fills up with knowledge that's all fresh and actively used, SYNAPSE never silently drops anything — it flags memory pressure and asks you: raise the budget, or archive (archived entries stay on disk, still findable with `/recall`).
 
 Every night (cron / Task Scheduler — or `/consolidate` manually), a headless consolidation pass runs on your existing subscription: it writes the day's hindsight, refreshes the primer surgically, flags contradictions (never arbitrates them — you own the truth), rotates old decisions to cold storage, promotes reusable learnings to the global brain, and re-ranks the index.
 
@@ -124,7 +125,7 @@ The memory itself is agent-agnostic — plain files plus a protocol. Platform su
 
 **Where exactly is my data?** `~/.claude/brain/` (global) + `<project>/.claude/memory/` (local). Delete them and SYNAPSE is gone.
 
-**What does it cost per session?** ≈1–2k tokens of context (index + primer + brief). The hard limits exist precisely to keep this bounded.
+**What does it cost per session?** Your choice: lean ≈1–2k tokens (≤8 projects), pro ≈3–5k (≤30 projects), max ≈6–10k, or custom — set at install, resize anytime with `/memory-budget`. Only the auto-loaded index is capped; what you can store is unlimited.
 
 **Multiple machines?** Make `~/.claude/brain/` a **private** git repo — the file tells your agent how (Part 4).
 
