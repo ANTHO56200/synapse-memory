@@ -6,7 +6,7 @@
 
 One markdown file. Zero dependencies. Drag it into a conversation, and your agent never forgets.
 
-![Version](https://img.shields.io/badge/version-3.1-2dd4bf) ![License](https://img.shields.io/badge/license-MIT-blue) ![Platforms](https://img.shields.io/badge/platforms-macOS%20·%20Linux%20·%20Windows-555) ![Works with](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Cursor%20·%20Codex%20·%20Gemini-8b5cf6)
+![Version](https://img.shields.io/badge/version-3.5-2dd4bf) ![License](https://img.shields.io/badge/license-MIT-blue) ![Platforms](https://img.shields.io/badge/platforms-macOS%20·%20Linux%20·%20Windows-555) ![Works with](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Cursor%20·%20Codex%20·%20Gemini-8b5cf6)
 
 [Install](#install) · [What you get](#what-you-get) · [How it works](#how-it-works) · [The cognitive engine](#the-cognitive-engine) · [Other agents](#beyond-claude-code) · [FAQ](#faq)
 
