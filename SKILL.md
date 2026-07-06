@@ -3,7 +3,7 @@ name: synapse
 description: Perpetual memory and shared brain for Claude Code. A two-level memory system — per-project memory plus a global cross-project brain — that makes Claude remember everything across all sessions and all projects. USE THIS SKILL whenever a session starts in any project, whenever the user mentions memory, remembering, recalling, forgetting, past decisions, past projects, "what did we decide", "have we done this before", knowledge reuse, memory map, or asks to install/setup/check/visualize a memory system. Also use it whenever you learn something reusable (research findings, best practices, patterns, tool knowledge) that future projects would benefit from — even if the user doesn't mention memory explicitly.
 ---
 
-<!-- SYNAPSE_VERSION: 3.4 -->
+<!-- SYNAPSE_VERSION: 3.5 -->
 
 # SYNAPSE v3 — Perpetual Memory & Shared Brain for AI Coding Agents
 
@@ -216,6 +216,7 @@ git add .claude/memory/primer.md .claude/memory/warm .claude/memory/cold 2>/dev/
 git diff --cached --quiet 2>/dev/null || git commit -m "chore(synapse): consolidation $T" --no-verify >/dev/null 2>&1
 ```
 `chmod +x`. Then ASK the user (do not assume): install a nightly consolidation at 23:30?
+**Timezone sanity-check first**: scheduled times are MACHINE-local. Compare the machine clock (`date`) with the user's actual time of day — remote workers and travelers often have a clock set to another country. If they differ, schedule the machine-time slot that matches the user's REAL late evening (e.g. machine on Paris time, user in Bali → 17:30 machine = 23:30 local) and tell them; offer to fix the OS timezone as the cleaner long-term option.
 - **macOS/Linux/WSL** — cron:
 ```bash
 (crontab -l 2>/dev/null | grep -v "synapse-consolidate.*$(basename $(pwd))"; \
