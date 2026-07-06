@@ -344,7 +344,7 @@ Warn the user: the brain may contain business knowledge → **private repo only*
 
 ## Part 6 — What to tell the user after bootstrap (keep it to this)
 
-"SYNAPSE v3 installed: project memory auto-loads every session, global brain shared across all your projects, [nightly cron / nightly Task Scheduler / manual] consolidation. Commands: /brief (+ 'full' for the complete memory report) /recall /decision /learn /forget /memory-map (visual dashboard) /memory-budget (resize what auto-loads) /consolidate /memory-doctor. Memory budget: [chosen profile] — storage itself is unlimited. Drop this same file in any other project — it joins the brain network automatically. It also works with other AI agents (portable mode, Part 7) — same brain." If a migration ran, add one line: "Your previous memory system was absorbed — X decisions, Y session archives, Z learnings promoted to the global brain. Backup kept 7 days at .claude/memory-backup-<date>/."
+"SYNAPSE v<version from this file's SYNAPSE_VERSION marker> installed: project memory auto-loads every session, global brain shared across all your projects, [nightly cron / nightly Task Scheduler / manual] consolidation. Commands: /brief (+ 'full' for the complete memory report) /recall /decision /learn /forget /memory-map (visual dashboard) /memory-budget (resize what auto-loads) /consolidate /memory-doctor. Memory budget: [chosen profile] — storage itself is unlimited. Drop this same file in any other project — it joins the brain network automatically. It also works with other AI agents (portable mode, Part 7) — same brain." If a migration ran, add one line: "Your previous memory system was absorbed — X decisions, Y session archives, Z learnings promoted to the global brain. Backup kept 7 days at .claude/memory-backup-<date>/."
 
 ---
 
@@ -368,7 +368,7 @@ Result: full memory, shared with every other SYNAPSE-running agent on the machin
 
 ## Part 8 — Field manual (what living with SYNAPSE looks like)
 
-**Day 1 — install.** You drag this file into Claude Code inside `shop-app/`. Under a minute later: brain created, project scanned into a real primer, hooks live, 9 commands installed, 3-line report. Nothing else about your workflow changes.
+**Day 1 — install.** You drag this file into Claude Code inside `shop-app/`. Under a minute later: brain created, project scanned into a real primer, hooks live, all commands installed, 3-line report. Nothing else about your workflow changes.
 
 **Day 9 — a decision.** You pick Supabase Auth over Clerk. `/decision Supabase Auth over Clerk — pricing scales badly`. Logged in primer + decisions-log, automatically checked for contradictions against past decisions and global practices.
 

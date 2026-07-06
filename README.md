@@ -55,7 +55,7 @@ All agents share **the same brain** — knowledge learned in Claude is available
 1. **Your memory budget** — how much of the brain auto-loads at every session start. Four levels, each shown with the REAL token cost computed from *your* actual brain: `lean` (index only, ≈1–2k) · `pro` (+ active-project cards, ≈3–8k) · `deep` (+ all practices + your top-20 notes, ≈10–40k) · `full` (total recall — the entire brain in context, typically 50–150k once mature). Nothing is a commitment: a fresh brain costs ~2–3k at *any* level — cost only grows with what you actually store — and `/memory-budget` switches levels anytime.
 2. **Nightly consolidation** — the 23:30 "sleep cycle" (cron on macOS/Linux, Task Scheduler on Windows), running headless on your existing Claude subscription (`claude -p`), no API key. The installer sanity-checks your machine's clock first: if it lives in another timezone than you do (remote workers, travelers), it schedules your *real* late evening. **Machine off that night? Nothing is lost**: consolidation always processes everything *since the last hindsight*, so the next run — scheduled or a manual `/consolidate` — catches up with zero memory gaps.
 
-That's it. Everything else installs silently: memory auto-load, hooks, the 10 commands, project registration in the brain.
+That's it. Everything else installs silently: memory auto-load, hooks, all the commands, project registration in the brain.
 
 ![The installer asking for your memory budget, with real costs](demo/install-budget.png)
 
