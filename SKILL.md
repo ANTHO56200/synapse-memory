@@ -3,7 +3,7 @@ name: synapse
 description: Perpetual memory and shared brain for Claude Code. A two-level memory system — per-project memory plus a global cross-project brain — that makes Claude remember everything across all sessions and all projects. USE THIS SKILL whenever a session starts in any project, whenever the user mentions memory, remembering, recalling, forgetting, past decisions, past projects, "what did we decide", "have we done this before", knowledge reuse, memory map, or asks to install/setup/check/visualize a memory system. Also use it whenever you learn something reusable (research findings, best practices, patterns, tool knowledge) that future projects would benefit from — even if the user doesn't mention memory explicitly.
 ---
 
-<!-- SYNAPSE_VERSION: 3.3 -->
+<!-- SYNAPSE_VERSION: 3.4 -->
 
 # SYNAPSE v3 — Perpetual Memory & Shared Brain for AI Coding Agents
 
@@ -81,7 +81,7 @@ The user chooses knowing the price; `/memory-budget` re-shows costs and switches
 # BRAIN — Global Index
 > Budget: lean | index-limit: 60   (levels: lean|pro|deep|full — resize anytime: /memory-budget)
 > One line per entry, pointer to the detail file. Hard limit = index-limit above.
-> Freshness: entries marked ⏳ need re-verification (see stale_after).
+> Freshness: stale entries get a ⏳ prefix on their line (see stale_after).
 
 ## Knowledge
 (empty — filled as you learn)
@@ -164,7 +164,7 @@ L=$(ls -t $M/cold/hindsight/*.md 2>/dev/null | head -1)
 grep -qE "CONFLICT|MEMORY PRESSURE" $M/primer.md 2>/dev/null && echo "⚠ Conflicts or memory pressure flagged in primer"
 S=$(ls $M/scratch/*.md 2>/dev/null | wc -l); [ "$S" -gt 0 ] && echo "📋 $S unconsolidated scratch dump(s)"
 B=~/.claude/brain/BRAIN.md
-STALE=$(grep -c "⏳" "$B" 2>/dev/null)
+STALE=$(grep -c "^-.*⏳" "$B" 2>/dev/null)
 [ "${STALE:-0}" -gt 0 ] && echo "⏳ $STALE stale knowledge entries in global brain"
 LIM=$(grep -m1 -o "index-limit: [0-9]*" "$B" 2>/dev/null | grep -o "[0-9]*"); CUR=$(wc -l < "$B" 2>/dev/null)
 [ -n "$LIM" ] && [ "${CUR:-0}" -ge $((LIM*9/10)) ] && echo "⚠ Brain index $CUR/$LIM lines — raise /memory-budget or archive"
