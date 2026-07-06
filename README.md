@@ -156,6 +156,10 @@ Issues and PRs welcome — especially portable-mode reports from other agents, a
 
 If SYNAPSE saved your context, a ⭐ helps others find it.
 
+## The companion library
+
+SYNAPSE teaches your agent *to remember*. The **[Claude Skills Library](https://github.com/ANTHO56200/claude-skills-library)** teaches it *how to work* — free, MIT-licensed, token-lean skills covering security, testing, dev-workflow, AI/LLM, research and more. The two are built to work together.
+
 ## License & author
 
 MIT © 2026 [Anthony Martinez](https://github.com/ANTHO56200) — founder, [The Planet Tools](https://theplanettools.ai).
