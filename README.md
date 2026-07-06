@@ -57,6 +57,8 @@ All agents share **the same brain** — knowledge learned in Claude is available
 
 That's it. Everything else installs silently: memory auto-load, hooks, the 10 commands, project registration in the brain.
 
+![The installer asking for your memory budget, with real costs](demo/install-budget.png)
+
 ## What you get
 
 | Command | What it does |
@@ -73,6 +75,10 @@ That's it. Everything else installs silently: memory auto-load, hooks, the 10 co
 | `/memory-doctor` | Memory health score /100 + auto-fixes |
 
 Plus the automatic part: memory auto-loads at every session start, a pre-compaction hook saves state before context loss, and the session brief warns you about unarbitrated conflicts and stale knowledge.
+
+**`/brief full` — the complete state of your memory, on demand:**
+
+![The /brief full report](demo/brief-full.png)
 
 **The `/memory-map` dashboard** ([live demo](https://claude.ai/code/artifact/3e486f24-d565-401d-bdaf-27e6a9ae5251), [source](./demo/memory-map-demo.html)):
 
