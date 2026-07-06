@@ -61,7 +61,7 @@ All agents share **the same brain** — knowledge learned in Claude is available
 | `/learn <insight>` | Promote reusable knowledge to the global brain |
 | `/forget <topic>` | Clean removal — soft by default, restorable from the attic |
 | `/memory-map` | Visual HTML dashboard of everything your agent knows |
-| `/memory-budget` | Choose how much memory auto-loads per session (lean/pro/max) — storage itself is unlimited |
+| `/memory-budget` | Choose how much memory auto-loads per session — from a 2k-token index up to **full total recall** (your entire brain in context). Real cost shown before you choose; storage itself is unlimited |
 | `/consolidate` | Run the sleep cycle right now |
 | `/memory-doctor` | Memory health score /100 + auto-fixes |
 
@@ -88,7 +88,7 @@ Plus the automatic part: memory auto-loads at every session start, a pre-compact
 └── scratch/                         ephemeral (pre-compaction dumps)
 ```
 
-Memory lives on a **compression gradient**, like human memory: L0 full detail → L1 one-page summary → L2 one index line. Only L2 loads by default — ≈1–2k tokens per session on the default budget, resizable up to ~10k with `/memory-budget` if you juggle dozens of projects; depth is one file-read away. Hard limits at your chosen budget force compression so the hot context never bloats, while **storage on disk stays unlimited**. When the index fills up with knowledge that's all fresh and actively used, SYNAPSE never silently drops anything — it flags memory pressure and asks you: raise the budget, or archive (archived entries stay on disk, still findable with `/recall`).
+Memory lives on a **compression gradient**, like human memory: L0 full detail → L1 one-page summary → L2 one index line. How much auto-loads per session is **your choice — the memory budget**: `lean` injects the index only (≈1–2k tokens), `pro` adds your active-project cards (≈3–8k), `deep` adds all practices + your top-20 most-used notes (≈10–40k), and `full` is **total recall** — the entire L1 brain in context, every session (typically 50–150k tokens; modern long-context models scan it, keep what today's task needs, set the rest aside). Levels ≥ pro ride in a precompiled `HOT.md` pack rebuilt nightly, and `/memory-budget` always shows the real token price of each level *for your actual brain* before you choose. Hard limits force compression so the hot context never bloats, while **storage on disk stays unlimited**. And when the index fills up with knowledge that's all fresh and actively used, SYNAPSE never silently drops anything — it flags memory pressure and asks you: raise the budget, or archive (archived entries stay on disk, still findable with `/recall`).
 
 Every night (cron / Task Scheduler — or `/consolidate` manually), a headless consolidation pass runs on your existing subscription: it writes the day's hindsight, refreshes the primer surgically, flags contradictions (never arbitrates them — you own the truth), rotates old decisions to cold storage, promotes reusable learnings to the global brain, and re-ranks the index.
 
@@ -101,6 +101,8 @@ SYNAPSE borrows the mechanisms that make biological memory work:
 - **Hebbian reinforcement** — every note tracks `uses` / `last_used`. Knowledge that answers real questions earns its place in the index; dormant notes are eviction candidates (their files remain, greppable).
 - **Spaced repetition** — a note re-verified *unchanged* doubles its `stale_after` (max 365d); a note that *changed* halves it (min 30d). The memory learns its own decay rate, like flashcards.
 - **Freshness decay** — every fact carries `verified` + `stale_after`. Past due → flagged ⏳ in the session brief. An agent that says "let me re-check" beats one confidently citing March pricing in July.
+- **⭐ Golden references** — mark your best work (`golden: true`): the site with your best SEO scores, the auth flow that never failed. Golden notes are never evicted, always in the hot pack, and become the default blueprint whenever you build something similar.
+- **Gotcha memory** — a painful bug and its fix always become a brain note tagged `gotcha`, even if it felt project-specific. The Stripe nightmare you solved six months ago in another repo? Your agent remembers the fix — and never hits that wall again.
 
 ## Beyond Claude Code
 
@@ -125,7 +127,7 @@ The memory itself is agent-agnostic — plain files plus a protocol. Platform su
 
 **Where exactly is my data?** `~/.claude/brain/` (global) + `<project>/.claude/memory/` (local). Delete them and SYNAPSE is gone.
 
-**What does it cost per session?** Your choice: lean ≈1–2k tokens (≤8 projects), pro ≈3–5k (≤30 projects), max ≈6–10k, or custom — set at install, resize anytime with `/memory-budget`. Only the auto-loaded index is capped; what you can store is unlimited.
+**What does it cost per session?** Your choice, price shown upfront: lean ≈1–2k tokens · pro ≈3–8k · deep ≈10–40k · **full total recall** = the real size of your entire brain (typically 50–150k). Set at install, resize anytime with `/memory-budget`. Only the auto-load is capped; what you can store is unlimited.
 
 **Multiple machines?** Make `~/.claude/brain/` a **private** git repo — the file tells your agent how (Part 4).
 
